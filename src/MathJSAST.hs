@@ -23,7 +23,7 @@ data Variable = Variable String
 
 -- Our abstract Syntax
 data Expr = Constant Types      -- Constant
-          | Seq [Expr]    -- Sequence of expressions
+          | Seq [Expr]          -- Sequence of expressions
           | Var Variable        -- Variable
           | Infix Operators Expr Expr
                                 -- Infix Operation
