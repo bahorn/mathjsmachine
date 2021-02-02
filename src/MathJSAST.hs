@@ -23,7 +23,7 @@ data Variable = Variable String
 
 -- Our abstract Syntax
 data Expr = Constant Types      -- Constant
-          | Seq Expr Expr       -- Sequence of expressions
+          | Seq [Expr]    -- Sequence of expressions
           | Var Variable        -- Variable
           | Infix Operators Expr Expr
                                 -- Infix Operation
@@ -66,8 +66,8 @@ instance Show Expr where
         show x
     show (Infix op s1 s2) =
         "(" ++ show s1 ++ ")" ++ show op ++ "(" ++ show s2 ++ ")"
-    show (Seq s1 s2) =
-        show s1 ++ ";" ++ show s2
+    show (Seq seq) =
+        intercalate ";" $ map show seq
     show (Assign var value) =
         show var ++ "=" ++ show value
     show (If s s1 s2) =
