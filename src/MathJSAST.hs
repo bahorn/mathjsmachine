@@ -11,13 +11,14 @@ data Types = Bool Bool
            | Float Float
            deriving (Eq)
 
--- Basic operators
-data Operators = Plus
+-- Basic operators that take two arguments.
+data InfixOperators = Plus
                | Minus
                | Mul
                | Div
                | Power
                deriving (Eq)
+
 
 data Variable = Variable String
 
@@ -25,7 +26,7 @@ data Variable = Variable String
 data Expr = Constant Types      -- Constant
           | Seq [Expr]          -- Sequence of expressions
           | Var Variable        -- Variable
-          | Infix Operators Expr Expr
+          | Infix InfixOperators Expr Expr
                                 -- Infix Operation
           | Assign Variable Expr
                                 -- Assign a value to a variable.
@@ -47,7 +48,7 @@ instance Show Types where
     show (Int x) = show x
     show (Float x) = show x
 
-instance Show Operators where
+instance Show InfixOperators where
     show x = case x of
                Plus -> "+"
                Minus -> "-"
