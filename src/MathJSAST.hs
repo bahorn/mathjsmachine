@@ -1,5 +1,3 @@
-{-# LANGUAGE GADTs #-} 
-
 module MathJSAST where
 
 import Data.List
@@ -12,7 +10,7 @@ data Types = Bool Bool
            deriving (Eq)
 
 -- Basic operators that take two arguments.
-data InfixOperators = Plus
+data DyadicOperators = Plus
                | Minus
                | Mul
                | Div
@@ -26,7 +24,7 @@ data Variable = Variable String
 data Expr = Constant Types      -- Constant
           | Seq [Expr]          -- Sequence of expressions
           | Var Variable        -- Variable
-          | Infix InfixOperators Expr Expr
+          | Infix DyadicOperators Expr Expr
                                 -- Infix Operation
           | Assign Variable Expr
                                 -- Assign a value to a variable.
@@ -48,7 +46,7 @@ instance Show Types where
     show (Int x) = show x
     show (Float x) = show x
 
-instance Show InfixOperators where
+instance Show DyadicOperators where
     show x = case x of
                Plus -> "+"
                Minus -> "-"
